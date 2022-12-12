@@ -29,8 +29,12 @@ define( 'WPG_PORTFOLIO_VERSION', '0.1.0' );
  * Registers the block using the metadata loaded from the `block.json` file.
 */
 function wpgo_create_block_init() {
+	
 	register_block_type( __DIR__ . '/build/showcase' );
 	register_block_type( __DIR__ . '/build/slider' );
+
+	// requred to access REST API
+	wp_localize_script( 'create-block-portfolio-showcase-editor-script', 'wpgp_data', [ 'siteUrl' => get_site_url() ] );
 }
 add_action( 'init', 'wpgo_create_block_init' );
 

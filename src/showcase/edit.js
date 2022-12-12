@@ -1,7 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useSelect, select } from '@wordpress/data';
-import { useEntityProp } from '@wordpress/core-data';
-
+import { useSelect } from '@wordpress/data';
 import { useBlockProps } from '@wordpress/block-editor';
 
 import './editor.scss';
@@ -12,6 +10,8 @@ export default function Edit({attributes, setAttributes, className}) {
 	const posts = useSelect( ( select ) => {
 		return select( 'core' ).getEntityRecords( 'postType', 'portfolio' );
 	});
+
+	console.log( wpgp_data.siteUrl );
 
 	// The output
 	function portfolioShow (items) {
@@ -35,7 +35,7 @@ export default function Edit({attributes, setAttributes, className}) {
 							return "Image Not Loaded";
 						}
 						if(imgURL) {
-							console.log(imgURL);
+							//console.log(imgURL);
 							return (<img src={ imgURL.media_details.sizes.medium_large.source_url } />);
 						}						
 
