@@ -18,12 +18,11 @@ function register_wpgp_rest_route()
 }
 add_action('rest_api_init', 'register_wpgp_rest_route');
 
-
+// Custom REST Route callback function
 function wpgp_custom_rest_route()
 {
 
 	$results = [];
-    $img_urls = [];
 
     $portfolio_query = new WP_Query([
         'post_type' => 'portfolio',
@@ -33,6 +32,9 @@ function wpgp_custom_rest_route()
  
     // proceed to database query
     while ($portfolio_query->have_posts()) {
+
+        $img_urls = [];
+        
         $portfolio_query->the_post();
 
 		//Get the portfolio category list and strip the link
@@ -55,8 +57,8 @@ function wpgp_custom_rest_route()
             'subtitle'              => get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true),
             'link'                  => get_post_meta(get_the_ID(), 'wpgp_portfolio_url', true),
             'featured Image'        => get_the_post_thumbnail_url( get_the_ID(), 'full' ),
-            'media'                 => $img_urls,
-			'tags'		            => $portfolio_categories,
+            'mediaurls'                 => $img_urls,
+			'categories'		    => $portfolio_categories,
 
         ]);
     }

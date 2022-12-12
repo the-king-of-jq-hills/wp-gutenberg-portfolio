@@ -1,60 +1,58 @@
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { useEffect, useState } from 'react';
 import { useBlockProps } from '@wordpress/block-editor';
 
 import './editor.scss';
 
 export default function Edit({attributes, setAttributes, className}) {
 
-	// Get the portfolio items
-	const posts = useSelect( ( select ) => {
-		return select( 'core' ).getEntityRecords( 'postType', 'portfolio' );
-	});
+	const restURL = wpgp_data.siteUrl + '/wp-json/wpportfolio/v1/portfolio';
 
-	console.log( wpgp_data.siteUrl );
 
+    const [posts, setPosts] = useState([]);
+    useEffect(() => {
+        async function loadPosts() {
+	
+            const response = await fetch(restURL);
+            if(!response.ok) {
+                // oups! something went wrong
+                return;
+            }
+
+            const posts = await response.json();
+            setPosts(posts);
+        }
+    
+        loadPosts();
+   }, [])
+   
+   
 	// The output
-	function portfolioShow (items) {
+	function portfolioShow (posts) {
+		console.log(posts);
 
-		if( !items ) {
-			return <h1>{ __("Items Not Loaded", "wpgp_portfolio_subtitle") }</h1>
-		}
-		if( items && items.length === 0 ) {
-			return <h1>{ __("No Items Available", "wpgp_portfolio_subtitle") }</h1>	
-		}
-		if( items ) {
-			const showCase = items.map((pitem, index) => {
-
-				if ( pitem.meta.wpgp_portfolio_featuredimage.length > 0 ) {
-
-					var mediaURL = pitem.meta.wpgp_portfolio_featuredimage.map( (imageID) => {
-
-						const imgURL = wp.data.select('core').getMedia(imageID);
-
-						if(!imgURL) {
-							return "Image Not Loaded";
-						}
-						if(imgURL) {
-							//console.log(imgURL);
-							return (<img src={ imgURL.media_details.sizes.medium_large.source_url } />);
-						}						
-
-					});				
-
-				}	
-
-
-				return (
-					<div className='portfolio-item'>
-						<h2>{pitem.title.rendered}</h2>
-						<p>{pitem.content.rendered}</p>
-						<p>{pitem.link}</p>
-						<div>{mediaURL}</div>
-					</div>
-				);
+		const showCase = posts.map((post) => {
+			
+			// Portfolio Category list to string
+			const categoryList = post.categories.toString();
+			
+			const imageList = post.mediaurls.map((imageURLs) => {
+				return (<img src={imageURLs} alt='' />);
 			});
-			return showCase;
-		}
+
+			return (
+				<div className='portfolio-item'>
+					<h2>{post.title}</h2>
+					<h4>{post.subtitle}</h4>
+					<div>{categoryList}</div>
+					<div>{imageList}</div>
+				</div>
+			);
+
+		});
+		
+
+		return showCase;
 	}
 	
 

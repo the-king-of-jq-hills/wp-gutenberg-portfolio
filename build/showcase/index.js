@@ -16,8 +16,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/showcase/editor.scss");
@@ -32,42 +32,38 @@ function Edit(_ref) {
     setAttributes,
     className
   } = _ref;
-  // Get the portfolio items
-  const posts = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
-    return select('core').getEntityRecords('postType', 'portfolio');
-  });
-  console.log(wpgp_data.siteUrl);
+  const restURL = wpgp_data.siteUrl + '/wp-json/wpportfolio/v1/portfolio';
+  const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    async function loadPosts() {
+      const response = await fetch(restURL);
+      if (!response.ok) {
+        // oups! something went wrong
+        return;
+      }
+      const posts = await response.json();
+      setPosts(posts);
+    }
+    loadPosts();
+  }, []);
 
   // The output
-  function portfolioShow(items) {
-    if (!items) {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Items Not Loaded", "wpgp_portfolio_subtitle"));
-    }
-    if (items && items.length === 0) {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("No Items Available", "wpgp_portfolio_subtitle"));
-    }
-    if (items) {
-      const showCase = items.map((pitem, index) => {
-        if (pitem.meta.wpgp_portfolio_featuredimage.length > 0) {
-          var mediaURL = pitem.meta.wpgp_portfolio_featuredimage.map(imageID => {
-            const imgURL = wp.data.select('core').getMedia(imageID);
-            if (!imgURL) {
-              return "Image Not Loaded";
-            }
-            if (imgURL) {
-              //console.log(imgURL);
-              return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-                src: imgURL.media_details.sizes.medium_large.source_url
-              });
-            }
-          });
-        }
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "portfolio-item"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, pitem.title.rendered), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, pitem.content.rendered), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, pitem.link), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, mediaURL));
+  function portfolioShow(posts) {
+    console.log(posts);
+    const showCase = posts.map(post => {
+      // Portfolio Category list to string
+      const categoryList = post.categories.toString();
+      const imageList = post.mediaurls.map(imageURLs => {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+          src: imageURLs,
+          alt: ""
+        });
       });
-      return showCase;
-    }
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "portfolio-item"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, post.title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", null, post.subtitle), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, categoryList), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, imageList));
+    });
+    return showCase;
   }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(), portfolioShow(posts));
 }
@@ -151,6 +147,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ (function(module) {
+
+module.exports = window["React"];
+
+/***/ }),
+
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -168,16 +174,6 @@ module.exports = window["wp"]["blockEditor"];
 /***/ (function(module) {
 
 module.exports = window["wp"]["blocks"];
-
-/***/ }),
-
-/***/ "@wordpress/data":
-/*!******************************!*\
-  !*** external ["wp","data"] ***!
-  \******************************/
-/***/ (function(module) {
-
-module.exports = window["wp"]["data"];
 
 /***/ }),
 
