@@ -8,14 +8,13 @@ export default function Edit({attributes, setAttributes, className}) {
 
 	const restURL = wpgp_data.siteUrl + '/wp-json/wpportfolio/v1/portfolio';
 
-
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         async function loadPosts() {
 	
             const response = await fetch(restURL);
             if(!response.ok) {
-                // oups! something went wrong
+                // oups! something went wrong 
                 return;
             }
 
@@ -36,16 +35,27 @@ export default function Edit({attributes, setAttributes, className}) {
 			// Portfolio Category list to string
 			const categoryList = post.categories.toString();
 			
+			const imageURL = post.mediaurls ? post.mediaurls[0] : null;
+			console.log(imageURL);
+
+			/* 
 			const imageList = post.mediaurls.map((imageURLs) => {
 				return (<img src={imageURLs} alt='' />);
 			});
+			*/
 
 			return (
 				<div className='portfolio-item'>
-					<h2>{post.title}</h2>
-					<h4>{post.subtitle}</h4>
-					<div>{categoryList}</div>
-					<div>{imageList}</div>
+					<div>
+						<div className='image-container'>
+							<a href={post.pagelink} rel='nofollow' target='_blank'>
+								<img src={imageURL} alt={post.title} className='portfolio-image' />
+							</a>
+						</div>
+						<h3>{post.title}</h3>
+						<h4>{post.subtitle}</h4>
+						<div>{categoryList}</div>
+					</div>
 				</div>
 			);
 

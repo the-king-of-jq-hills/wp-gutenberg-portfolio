@@ -40,7 +40,7 @@ function wpg_custom_post_type() {
 											'custom-fields', 
 											'tags', 
 											'excerpt', 
-											'thumbnail',
+											//'thumbnail',
 											'page-attributes'
 										),
 			'taxonomies'          => array( 'portfolio-category', 'portfolio-tag' ),
@@ -50,7 +50,7 @@ function wpg_custom_post_type() {
 			'query_var'           => true,
 			'rewrite'             => array( 'slug' => 'portfolio','with_front' => false ),			
 			'show_in_admin_bar'   => true,
-			'menu_position'       => 5,
+			'menu_position'       => 4,
 			'can_export'          => true,
 			'has_archive'         => true,
 			'exclude_from_search' => false,

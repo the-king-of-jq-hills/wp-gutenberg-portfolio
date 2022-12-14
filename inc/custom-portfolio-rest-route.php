@@ -34,8 +34,8 @@ function wpgp_custom_rest_route()
     while ($portfolio_query->have_posts()) {
 
         $img_urls = [];
-        
         $portfolio_query->the_post();
+
 
 		//Get the portfolio category list and strip the link
         $portfolio_terms = get_the_terms(get_the_ID(), 'portfolio-category');
@@ -53,11 +53,12 @@ function wpgp_custom_rest_route()
         array_push($results, [
 			'ID'                    => get_the_ID(),
             'title'                 => get_the_title(),
+            'pagelink'              => get_the_permalink(),
             'details'               => get_the_content(),			
             'subtitle'              => get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true),
             'link'                  => get_post_meta(get_the_ID(), 'wpgp_portfolio_url', true),
-            'featured Image'        => get_the_post_thumbnail_url( get_the_ID(), 'full' ),
-            'mediaurls'                 => $img_urls,
+            //'featured Image'        => get_the_post_thumbnail_url( get_the_ID(), 'full' ),
+            'mediaurls'             => $img_urls,
 			'categories'		    => $portfolio_categories,
 
         ]);

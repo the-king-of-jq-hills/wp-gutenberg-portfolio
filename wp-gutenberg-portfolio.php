@@ -30,8 +30,7 @@ define( 'WPG_PORTFOLIO_VERSION', '0.1.0' );
 */
 function wpgo_create_block_init() {
 	
-	register_block_type( __DIR__ . '/build/showcase' );
-	register_block_type( __DIR__ . '/build/slider' );
+	register_block_type( __DIR__ . '/build' );
 
 	// requred to access REST API
 	wp_localize_script( 'create-block-portfolio-showcase-editor-script', 'wpgp_data', [ 'siteUrl' => get_site_url() ] );
@@ -39,14 +38,30 @@ function wpgo_create_block_init() {
 add_action( 'init', 'wpgo_create_block_init' );
 
 
-// Add Meta Boxes
-require_once('inc/meta-box-options.php');
+// enque block assets for back and front
+function wpg_portfolio_block_assets() {
+
+	// enque portfolio style
+    wp_enqueue_style( 'portfolio-style',  WPG_PORTFOLIO_URL . 'assets/css/portfolio-style.css', array(), WPG_PORTFOLIO_VERSION, false  );
+
+	// enque masonry script from WP Library
+    wp_enqueue_script( 'jquery-masonry' );
+
+	// enque custom stripts
+	wp_enqueue_script( 'portfolio-script',  WPG_PORTFOLIO_URL . 'assets/js/portfolio-script.js', array(), WPG_PORTFOLIO_VERSION, true );
+}
+add_action( 'enqueue_block_assets', 'wpg_portfolio_block_assets' );
+
 
 // Embed plugin meta-box if plugin not installed and active
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( !is_plugin_active( 'meta-box/meta-box.php' ) && !function_exists( 'rwmb_meta' ) ) {
 	require_once('inc/meta-box/meta-box.php');
 }
+
+// Add Meta Boxes
+require_once('inc/meta-box-options.php');
+
 
 // Custom post type and taxonomy
 require plugin_dir_path( __FILE__ ) . 'inc/custom-post-type-portfolio.php';

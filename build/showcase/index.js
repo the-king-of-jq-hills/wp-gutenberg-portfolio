@@ -61,7 +61,7 @@ function Edit(_ref) {
       });
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "portfolio-item"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, post.title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", null, post.subtitle), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, categoryList), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, imageList));
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, post.title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", null, post.subtitle), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, post.pagelink), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, categoryList), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, imageList));
     });
     return showCase;
   }
