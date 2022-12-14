@@ -20,7 +20,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+
 
 
 
@@ -29,10 +32,28 @@ __webpack_require__.r(__webpack_exports__);
 function Edit(_ref) {
   let {
     attributes,
-    setAttributes,
-    className
+    setAttributes
   } = _ref;
+  console.log(className);
+
+  // Getting the Site URL from localized script
   const restURL = wpgp_data.siteUrl + '/wp-json/wpportfolio/v1/portfolio';
+  const {
+    numberOfItems,
+    numberOfColumns
+  } = attributes;
+  const onChangenumberOfItems = newnumberOfItems => {
+    setAttributes({
+      numberOfItems: newnumberOfItems
+    });
+  };
+  const onChangenumberOfColumns = newnumberOfColumns => {
+    setAttributes({
+      numberOfColumns: newnumberOfColumns
+    });
+  };
+
+  // fetching the data
   const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
     async function loadPosts() {
@@ -49,12 +70,10 @@ function Edit(_ref) {
 
   // The output
   function portfolioShow(posts) {
-    console.log(posts);
     const showCase = posts.map(post => {
       // Portfolio Category list to string
       const categoryList = post.categories.toString();
       const imageURL = post.mediaurls ? post.mediaurls[0] : null;
-      console.log(imageURL);
 
       /* 
       const imageList = post.mediaurls.map((imageURLs) => {
@@ -78,7 +97,22 @@ function Edit(_ref) {
     });
     return showCase;
   }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(), portfolioShow(posts));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Portfolio Settings", "wp-gutenberg-portfolio"),
+    initialOpen: true
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Number of Items",
+    value: numberOfItems,
+    onChange: onChangenumberOfItems,
+    min: 4,
+    max: 16
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Number of Columns",
+    value: numberOfColumns,
+    onChange: onChangenumberOfColumns,
+    min: 1,
+    max: 4
+  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)(), portfolioShow(posts)));
 }
 
 /***/ }),
@@ -190,6 +224,16 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -216,7 +260,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/portfolio-showcase","version":"0.1.0","title":"Portfolio Showcase","category":"media","icon":"screenoptions","description":"A gutenberg portfolio block plugin to create portfolio showcase.","supports":{"html":false},"textdomain":"portfolio-showcase","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/portfolio-showcase","version":"0.1.0","title":"Portfolio Showcase","category":"media","icon":"screenoptions","description":"A gutenberg portfolio block plugin to create portfolio showcase.","supports":{"html":false},"textdomain":"portfolio-showcase","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"numberOfItems":{"type":"number","default":6},"numberOfColumns":{"type":"number","default":3}}}');
 
 /***/ })
 

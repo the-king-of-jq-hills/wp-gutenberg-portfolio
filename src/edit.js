@@ -1,13 +1,44 @@
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from 'react';
-import { useBlockProps } from '@wordpress/block-editor';
+
+import { 
+	useBlockProps, 
+	AlignmentControl, 
+	BlockControls,
+	InspectorControls,
+	PanelColorSettings
+} from '@wordpress/block-editor';
+
+import {
+	TextControl,
+	PanelBody,
+	PanelRow,
+	GradientPicker,
+	RangeControl,
+    __experimentalRadio as Radio,
+    __experimentalRadioGroup as RadioGroup,
+} from '@wordpress/components';
 
 import './editor.scss';
 
-export default function Edit({attributes, setAttributes, className}) {
+export default function Edit({attributes, setAttributes}) {
 
+	console.log(className);
+
+	// Getting the Site URL from localized script
 	const restURL = wpgp_data.siteUrl + '/wp-json/wpportfolio/v1/portfolio';
 
+	const { numberOfItems, numberOfColumns } = attributes;
+
+	const onChangenumberOfItems = ( newnumberOfItems ) => {
+		setAttributes( { numberOfItems : newnumberOfItems } )
+	}
+
+	const onChangenumberOfColumns = ( newnumberOfColumns ) => {
+		setAttributes( { numberOfColumns : newnumberOfColumns } )
+	}	
+
+	// fetching the data
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         async function loadPosts() {
@@ -28,7 +59,6 @@ export default function Edit({attributes, setAttributes, className}) {
    
 	// The output
 	function portfolioShow (posts) {
-		console.log(posts);
 
 		const showCase = posts.map((post) => {
 			
@@ -36,7 +66,6 @@ export default function Edit({attributes, setAttributes, className}) {
 			const categoryList = post.categories.toString();
 			
 			const imageURL = post.mediaurls ? post.mediaurls[0] : null;
-			console.log(imageURL);
 
 			/* 
 			const imageList = post.mediaurls.map((imageURLs) => {
@@ -67,8 +96,34 @@ export default function Edit({attributes, setAttributes, className}) {
 	
 
 	return (
-		<div { ...useBlockProps() }>
-			{ portfolioShow(posts) }
-		</div>
+		<>
+			<InspectorControls>
+				<PanelBody 
+					title={ __("Portfolio Settings", "wp-gutenberg-portfolio") }
+					initialOpen= {true}
+				>
+					<PanelRow>
+						<RangeControl
+							label="Number of Items"
+							value={ numberOfItems }
+							onChange={ onChangenumberOfItems } 								
+							min={ 4 }
+							max={ 16 }
+						/>
+						<RangeControl
+							label="Number of Columns"
+							value={ numberOfColumns }
+							onChange={ onChangenumberOfColumns } 								
+							min={ 1 }
+							max={ 4 }
+						/>											
+					</PanelRow>
+				</PanelBody>		
+			</InspectorControls>
+
+			<div { ...useBlockProps() }>
+				{ portfolioShow(posts) }
+			</div>
+		</>
 	);
 }

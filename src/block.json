@@ -13,5 +13,15 @@
 	"textdomain": "portfolio-showcase",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"attributes": {
+		"numberOfItems": {
+			"type": "number",
+			"default": 6
+		},
+		"numberOfColumns": {
+			"type": "number",
+			"default": 3
+		}
+	}	
 }
