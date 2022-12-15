@@ -119,7 +119,7 @@ export default function Edit({attributes, setAttributes}) {
 					title={ __("Portfolio Settings", "wp-gutenberg-portfolio") }
 					initialOpen= {true}
 				>
-					<PanelRow>
+					<PanelRow className='wpgp-panel'>
 						<RangeControl
 							label="Number of Items"
 							value={ numberOfItems }

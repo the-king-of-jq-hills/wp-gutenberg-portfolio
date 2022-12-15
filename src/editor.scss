@@ -7,3 +7,13 @@
 .wp-block-create-block-portfolio-showcase {
 	border: 1px dotted #aeaeae;
 }
+
+.components-panel__row.wpgp-panel {
+	display: block!important;	
+}
+.components-base-control {
+	display: block!important;
+	clear: both;
+	min-height: 56px;
+	width: 100%;
+}
