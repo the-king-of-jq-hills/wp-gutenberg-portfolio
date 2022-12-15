@@ -11,4 +11,74 @@
   padding: 0px;
 }
 
+.wpg-portfolio {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgb(216, 216, 216);
+}
+
+.wpg-portfolio::after {
+  display: table;
+  clear: both;
+  content: "";
+  height: 1px;
+}
+
+.wpg-portfolio * {
+  box-sizing: inherit;
+}
+
+.wpgp-column-5 .portfolio-item {
+  display: block;
+  float: left;
+  width: 20%;
+}
+
+.wpgp-column-4 .portfolio-item {
+  display: block;
+  float: left;
+  width: 25%;
+}
+
+.wpgp-column-3 .portfolio-item {
+  display: block;
+  float: left;
+  width: 33.33%;
+}
+
+.wpgp-column-2 .portfolio-item {
+  display: block;
+  float: left;
+  width: 50%;
+}
+
+.wpgp-item-container {
+  padding: 16px;
+  width: 100%;
+}
+
+.image-container {
+  display: block;
+}
+
+.image-container img {
+  width: 100%;
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .masonry {
+    -moz-column-count: 3;
+         column-count: 3;
+  }
+}
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  .masonry {
+    -moz-column-count: 2;
+         column-count: 2;
+  }
+}
+
 /*# sourceMappingURL=style-index.css.map*/

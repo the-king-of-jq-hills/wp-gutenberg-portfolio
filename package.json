@@ -16,5 +16,8 @@
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^24.6.0"
+	},
+	"dependencies": {
+		"masonry-layout": "^4.2.2"
 	}
 }

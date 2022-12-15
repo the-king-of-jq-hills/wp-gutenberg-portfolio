@@ -1,6 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from 'react';
 
+import Masonry from 'masonry-layout';
+
 import { 
 	useBlockProps, 
 	AlignmentControl, 
@@ -23,19 +25,19 @@ import './editor.scss';
 
 export default function Edit({attributes, setAttributes}) {
 
-	console.log(className);
-
 	// Getting the Site URL from localized script
 	const restURL = wpgp_data.siteUrl + '/wp-json/wpportfolio/v1/portfolio';
 
 	const { numberOfItems, numberOfColumns } = attributes;
 
 	const onChangenumberOfItems = ( newnumberOfItems ) => {
-		setAttributes( { numberOfItems : newnumberOfItems } )
+		setAttributes( { numberOfItems : newnumberOfItems } );
+		resetmasonry();
 	}
 
 	const onChangenumberOfColumns = ( newnumberOfColumns ) => {
-		setAttributes( { numberOfColumns : newnumberOfColumns } )
+		setAttributes( { numberOfColumns : newnumberOfColumns } );
+		resetmasonry();
 	}	
 
 	// fetching the data
@@ -60,7 +62,7 @@ export default function Edit({attributes, setAttributes}) {
 	// The output
 	function portfolioShow (posts) {
 
-		const showCase = posts.map((post) => {
+		const showCase = posts.slice(0,numberOfItems).map((post) => {
 			
 			// Portfolio Category list to string
 			const categoryList = post.categories.toString();
@@ -75,7 +77,7 @@ export default function Edit({attributes, setAttributes}) {
 
 			return (
 				<div className='portfolio-item'>
-					<div>
+					<div className='wpgp-item-container'>
 						<div className='image-container'>
 							<a href={post.pagelink} rel='nofollow' target='_blank'>
 								<img src={imageURL} alt={post.title} className='portfolio-image' />
@@ -94,6 +96,21 @@ export default function Edit({attributes, setAttributes}) {
 		return showCase;
 	}
 	
+	const wpgpClassName = 'wpg-portfolio wpgp-column-'+numberOfColumns;
+
+	// initiating the masonry layout
+	var isPortfolioExist = document.getElementsByClassName('wpg-portfolio');
+	if (isPortfolioExist.length > 0) {
+		var msnry = new Masonry( '.wpg-portfolio', {
+			itemSelector: '.portfolio-item'
+		});
+	}
+	// resetting the masonry layout
+	function resetmasonry() {
+		setTimeout(function() {
+			msnry.layout();
+		}, 100);
+	}
 
 	return (
 		<>
@@ -108,21 +125,23 @@ export default function Edit({attributes, setAttributes}) {
 							value={ numberOfItems }
 							onChange={ onChangenumberOfItems } 								
 							min={ 4 }
-							max={ 16 }
+							max={ 20 }
 						/>
 						<RangeControl
 							label="Number of Columns"
 							value={ numberOfColumns }
 							onChange={ onChangenumberOfColumns } 								
-							min={ 1 }
-							max={ 4 }
+							min={ 2 }
+							max={ 5 }
 						/>											
 					</PanelRow>
 				</PanelBody>		
 			</InspectorControls>
 
 			<div { ...useBlockProps() }>
-				{ portfolioShow(posts) }
+				<div className={`wpg-portfolio wpgp-column-${numberOfColumns}`}>
+					{ portfolioShow(posts) }
+				</div>
 			</div>
 		</>
 	);
