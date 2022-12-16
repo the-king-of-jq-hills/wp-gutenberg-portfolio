@@ -10,10 +10,11 @@ A dynamic gutenberg portfolio block plugin to create and showcase portfolio item
 
     - Custom Post Type 
     - Custom Taxonomies
+    - rwmb_meta (embeded) used for advanced portfolio image upload and other meta boxex
     - Custom REST API
     - Fetch Data using useEffect
     - Itegrating NPM package 'masonry-layout'
-    - Controls and live layout update
+    - Lve layout update with controls
 
 
 
