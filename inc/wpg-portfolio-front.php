@@ -23,7 +23,7 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
 
     $portfolio_query = new WP_Query([
         'post_type' => 'portfolio',
-        'posts_per_page' => -1,
+        'posts_per_page' => $attr["numberOfItems"],
     ]);
 
  

@@ -12,7 +12,6 @@ import {
 } from '@wordpress/block-editor';
 
 import {
-	TextControl,
 	PanelBody,
 	PanelRow,
 	GradientPicker,

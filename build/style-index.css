@@ -15,7 +15,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgb(151, 0, 78);
+  border: 1px solid rgb(192, 192, 192);
 }
 
 .wpg-portfolio::after {
@@ -102,16 +102,36 @@
 
 /* Masonry on medium-sized screens */
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
-  .masonry {
-    -moz-column-count: 3;
-         column-count: 3;
+  .wpgp-column-5 .portfolio-item {
+    width: 50%;
+  }
+  .wpgp-column-4 .portfolio-item {
+    width: 50%;
+  }
+  .wpgp-column-3 .portfolio-item {
+    width: 50%;
+  }
+  .wpgp-column-2 .portfolio-item {
+    width: 50%;
   }
 }
 /* Masonry on small screens */
-@media only screen and (max-width: 767px) and (min-width: 540px) {
-  .masonry {
-    -moz-column-count: 2;
-         column-count: 2;
+@media only screen and (max-width: 767px) {
+  .wpgp-column-5 .portfolio-item {
+    float: none;
+    width: 100%;
+  }
+  .wpgp-column-4 .portfolio-item {
+    float: none;
+    width: 100%;
+  }
+  .wpgp-column-3 .portfolio-item {
+    float: none;
+    width: 100%;
+  }
+  .wpgp-column-2 .portfolio-item {
+    float: none;
+    width: 100%;
   }
 }
 
