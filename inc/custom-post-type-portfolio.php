@@ -5,7 +5,13 @@
  * @since    1.0.0
  */ 
 
- /*
+// Disable direct file access.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
+
+/*
 * Creating the CPT
 */  
 function wpg_custom_post_type() {

@@ -1,17 +1,30 @@
 ( function( $ ) {
 
-    /*
-    $('.wpg-portfolio').masonry({
+    var $container = $('.wpg-portfolio-front');
+    
+    $container.masonry({
         itemSelector: '.portfolio-item'
     });
-
+    
+    /**/
     setTimeout(
         function() 
         {
-            $('.wpg-portfolio').masonry({
-                itemSelector: '.portfolio-item'
+            $container.masonry('reloadItems').masonry();
+            $container.imagesLoaded( function() {
+                $container.masonry();
             });
         }, 
-    2000);
-	*/	
+    1000);
+	
+
+    console.log("You Are In");
+    $('div.portfolio-item').on('inview', function(event, isInView) {
+        if (isInView) {
+            console.log("It Is Visible");
+        } else {
+            console.log("It Is NOT Visible");
+        }
+      });
+
 } )( jQuery );

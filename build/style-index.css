@@ -15,7 +15,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgb(216, 216, 216);
+  border: 1px solid rgb(151, 0, 78);
 }
 
 .wpg-portfolio::after {
@@ -53,13 +53,47 @@
   width: 50%;
 }
 
+.wpgp-item-container,
+.wpgp-item-container h3,
+.wpgp-item-container h4,
+.wpgp-item-container .wpgp-cat-list {
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+
 .wpgp-item-container {
   padding: 16px;
   width: 100%;
+  position: relative;
 }
 
 .image-container {
   display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.wpgp-item-container h3 {
+  position: absolute;
+  left: 24px;
+  bottom: 56px;
+  z-index: 2;
+}
+
+.wpgp-item-container h4 {
+  position: absolute;
+  left: 24px;
+  bottom: 28px;
+  z-index: 3;
+}
+
+.wpgp-item-container .wpgp-cat-list {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 1;
 }
 
 .image-container img {

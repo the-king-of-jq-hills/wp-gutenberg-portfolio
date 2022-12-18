@@ -30,7 +30,7 @@ define( 'WPG_PORTFOLIO_VERSION', '0.1.0' );
 */
 function wpgo_create_block_init() {
 	
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ . '/build', array( 'render_callback' => 'wpg_portfolio_render_front' ) );
 
 	// requred to access REST API
 	wp_localize_script( 'create-block-portfolio-showcase-editor-script', 'wpgp_data', [ 'siteUrl' => get_site_url() ] );
@@ -48,7 +48,10 @@ function wpg_portfolio_block_assets() {
     wp_enqueue_script( 'jquery-masonry' );
 
 	// enque custom stripts
-	wp_enqueue_script( 'portfolio-script',  WPG_PORTFOLIO_URL . 'assets/js/portfolio-script.js', array(), WPG_PORTFOLIO_VERSION, true );
+	wp_enqueue_script( 'jquery-inview',  WPG_PORTFOLIO_URL . 'assets/js/jquery.inview.min.js', array('jquery'), WPG_PORTFOLIO_VERSION, true );
+
+	// enque custom stripts
+	wp_enqueue_script( 'portfolio-script',  WPG_PORTFOLIO_URL . 'assets/js/portfolio-script.js', array('jquery'), WPG_PORTFOLIO_VERSION, true );
 }
 add_action( 'enqueue_block_assets', 'wpg_portfolio_block_assets' );
 
@@ -68,3 +71,6 @@ require plugin_dir_path( __FILE__ ) . 'inc/custom-post-type-portfolio.php';
 
 // Custom REST route for portfolio post type
 require plugin_dir_path( __FILE__ ) . 'inc/custom-portfolio-rest-route.php';
+
+// Frontend
+require plugin_dir_path( __FILE__ ) . 'inc/wpg-portfolio-front.php';

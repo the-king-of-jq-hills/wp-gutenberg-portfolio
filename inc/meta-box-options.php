@@ -5,6 +5,11 @@
  * @link https://docs.metabox.io/
  */
 
+// Disable direct file access.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
 
 add_filter( 'rwmb_meta_boxes', 'wpgp_register_meta_boxes' );
 

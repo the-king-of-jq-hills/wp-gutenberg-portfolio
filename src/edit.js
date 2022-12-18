@@ -85,7 +85,7 @@ export default function Edit({attributes, setAttributes}) {
 						</div>
 						<h3>{post.title}</h3>
 						<h4>{post.subtitle}</h4>
-						<div>{categoryList}</div>
+						<div className='wpgp-cat-list'>{categoryList}</div>
 					</div>
 				</div>
 			);
@@ -96,12 +96,10 @@ export default function Edit({attributes, setAttributes}) {
 		return showCase;
 	}
 	
-	const wpgpClassName = 'wpg-portfolio wpgp-column-'+numberOfColumns;
-
 	// initiating the masonry layout
-	var isPortfolioExist = document.getElementsByClassName('wpg-portfolio');
+	var isPortfolioExist = document.getElementsByClassName('wpg-portfolio-edit');
 	if (isPortfolioExist.length > 0) {
-		var msnry = new Masonry( '.wpg-portfolio', {
+		var msnry = new Masonry( '.wpg-portfolio-edit', {
 			itemSelector: '.portfolio-item'
 		});
 	}
@@ -139,7 +137,7 @@ export default function Edit({attributes, setAttributes}) {
 			</InspectorControls>
 
 			<div { ...useBlockProps() }>
-				<div className={`wpg-portfolio wpgp-column-${numberOfColumns}`}>
+				<div className={`wpg-portfolio wpg-portfolio-edit wpgp-column-${numberOfColumns}`}>
 					{ portfolioShow(posts) }
 				</div>
 			</div>

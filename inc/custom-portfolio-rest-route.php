@@ -6,6 +6,12 @@
  * @since    1.0.0
  */ 
 
+// Disable direct file access.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
+
 //Register REST route for the portfolio post type
 //url would be https://www.example.com/wp-json/wpportfolio/v1/portfolio
 function register_wpgp_rest_route()
@@ -57,7 +63,6 @@ function wpgp_custom_rest_route()
             'details'               => get_the_content(),			
             'subtitle'              => get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true),
             'link'                  => get_post_meta(get_the_ID(), 'wpgp_portfolio_url', true),
-            //'featured Image'        => get_the_post_thumbnail_url( get_the_ID(), 'full' ),
             'mediaurls'             => $img_urls,
 			'categories'		    => $portfolio_categories,
 
