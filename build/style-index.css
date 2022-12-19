@@ -53,6 +53,7 @@
   width: 50%;
 }
 
+.wpgp-contents-bg,
 .wpgp-item-container,
 .wpgp-item-container h3,
 .wpgp-item-container h4,
@@ -75,25 +76,61 @@
   z-index: 1;
 }
 
+.wpgp-contents-bg {
+  background-color: #FFFFFF;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  z-index: 2;
+  opacity: 0;
+}
+
 .wpgp-item-container h3 {
   position: absolute;
-  left: 24px;
-  bottom: 56px;
-  z-index: 2;
+  left: 32px;
+  bottom: 80px;
+  z-index: 3;
+  transition-delay: 0.3s;
+  margin-bottom: -72px;
+  opacity: 0;
 }
 
 .wpgp-item-container h4 {
   position: absolute;
-  left: 24px;
-  bottom: 28px;
+  left: 32px;
+  bottom: 56px;
   z-index: 3;
+  transition-delay: 0.4s;
+  margin-bottom: -64px;
+  opacity: 0;
 }
 
 .wpgp-item-container .wpgp-cat-list {
   position: absolute;
-  left: 24px;
-  bottom: 24px;
-  z-index: 1;
+  left: 32px;
+  bottom: 32px;
+  z-index: 3;
+  transition-delay: 0.5s;
+  margin-bottom: -56px;
+  opacity: 0;
+}
+
+.wpgp-item-container:hover .wpgp-contents-bg {
+  background-color: #FFFFFF;
+  padding: 0px;
+  opacity: 0.56;
+}
+
+.wpgp-item-container:hover h3,
+.wpgp-item-container:hover h4,
+.wpgp-item-container:hover .wpgp-cat-list {
+  margin-bottom: 0px;
+  opacity: 1;
 }
 
 .image-container img {

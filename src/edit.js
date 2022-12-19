@@ -82,9 +82,11 @@ export default function Edit({attributes, setAttributes}) {
 								<img src={imageURL} alt={post.title} className='portfolio-image' />
 							</a>
 						</div>
+						<div className='wpgp-contents-bg'></div>
 						<h3>{post.title}</h3>
 						<h4>{post.subtitle}</h4>
 						<div className='wpgp-cat-list'>{categoryList}</div>
+						
 					</div>
 				</div>
 			);

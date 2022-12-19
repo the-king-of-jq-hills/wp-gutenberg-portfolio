@@ -61,12 +61,15 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
         $output .= '<img src='.$img_url.' alt='.get_the_title().' class="portfolio-image" />';
         $output .= '</a>';
         $output .= '</div>';
+
+        $output .= '<div class="wpgp-contents-bg"></div>';
         $output .= '<div class="wpgp-link">';
         $output .= '<a href="'.get_post_meta(get_the_ID(), 'wpgp_portfolio_url', true).'" target="_blank" aria-label="External Link"></a>';
         $output .= '</div>';
         $output .= '<h3>'.get_the_title().'</h3>';
         $output .= '<h4>'.get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true).'</h4>';
         $output .= '<div class="wpgp-cat-list">'.$portfolio_categories.'</div>';
+
 
         $output .= '</div>';
         $output .= '</div>';
