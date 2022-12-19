@@ -78,11 +78,19 @@ export default function Edit({attributes, setAttributes}) {
 				<div className='portfolio-item'>
 					<div className='wpgp-item-container'>
 						<div className='image-container'>
-							<a href={post.pagelink} rel='nofollow' target='_blank'>
-								<img src={imageURL} alt={post.title} className='portfolio-image' />
-							</a>
+							<img src={imageURL} alt={post.title} className='portfolio-image' />
 						</div>
 						<div className='wpgp-contents-bg'></div>
+						<div className='wpgp-link'>
+							{/* Single Page Link */}
+							<a href={post.pagelink} rel='nofollow' target='_selft'>
+								<span class="dashicons dashicons-paperclip"></span>
+							</a>
+							{/* external portfolio link from metabox */}
+							{ post.link && <a href={post.link} rel='nofollow' target='_blank'>
+								<span class="dashicons dashicons-admin-links"></span></a> 
+							}
+						</div>
 						<h3>{post.title}</h3>
 						<h4>{post.subtitle}</h4>
 						<div className='wpgp-cat-list'>{categoryList}</div>

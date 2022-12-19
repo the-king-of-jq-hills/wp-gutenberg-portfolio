@@ -15,6 +15,7 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
 
     $output = '';
     $portfolio_categories = '';
+    $portfolio_url = '';
     $img_url = WPG_PORTFOLIO_URL . 'assets/missing.webp';
 
     $output .= '<div ' . get_block_wrapper_attributes() . '>';
@@ -33,6 +34,8 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
         $img_urls = [];
         $portfolio_query->the_post();
 
+        // External portfolio link
+        $portfolio_url = get_post_meta(get_the_ID(), 'wpgp_portfolio_url', true);
 
 		//Get the portfolio category list and strip the link
         $portfolio_terms = get_the_terms(get_the_ID(), 'portfolio-category');
@@ -57,15 +60,22 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
         $output .= '<div class="wpgp-item-container">';
 
         $output .= '<div class="image-container">';
-        $output .= '<a href='.get_the_permalink().' rel="nofollow" target="_blank">';
         $output .= '<img src='.$img_url.' alt='.get_the_title().' class="portfolio-image" />';
-        $output .= '</a>';
         $output .= '</div>';
 
         $output .= '<div class="wpgp-contents-bg"></div>';
+       
         $output .= '<div class="wpgp-link">';
-        $output .= '<a href="'.get_post_meta(get_the_ID(), 'wpgp_portfolio_url', true).'" target="_blank" aria-label="External Link"></a>';
+        $output .= '<a href='.get_the_permalink().' rel="nofollow" target="_self" aria-label="Portfolio Details" title="Portfolio Details">';
+        $output .= '<span class="dashicons dashicons-paperclip"></span>';
+        $output .= '</a>';
+        if ($portfolio_url) {
+            $output .= '<a href="'.$portfolio_url.'" target="_blank" aria-label="External Link" title="Portfolio Link">';
+            $output .= '<span class="dashicons dashicons-admin-links"></span>';
+            $output .= '</a>';
+        }
         $output .= '</div>';
+       
         $output .= '<h3>'.get_the_title().'</h3>';
         $output .= '<h4>'.get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true).'</h4>';
         $output .= '<div class="wpgp-cat-list">'.$portfolio_categories.'</div>';

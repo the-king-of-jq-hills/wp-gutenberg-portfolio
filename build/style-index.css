@@ -83,27 +83,65 @@
   right: 0px;
   top: 0px;
   bottom: 0px;
-  height: 100%;
-  width: 100%;
   padding: 0px;
   z-index: 2;
   opacity: 0;
 }
 
-.wpgp-item-container h3 {
+.wpgp-link {
+  display: block;
   position: absolute;
-  left: 32px;
-  bottom: 80px;
+  z-index: 3;
+  left: 48px;
+  top: 48px;
+}
+
+.entry-content .wpgp-link a,
+.entry-content .wpgp-link a:visited {
+  color: #969696;
+}
+
+.entry-content .wpgp-link a:hover {
+  color: #646464;
+}
+
+.wpgp-link a,
+.wpgp-link a:hover,
+.wpgp-link a:visited {
+  display: block;
+  position: relative;
+  float: left;
+  margin-right: 12px;
+  color: #646464;
+  text-decoration: none;
+  font-size: 32px;
+  transition-delay: 0.5s;
+  margin-top: -64px;
+  opacity: 0;
+}
+
+.wpgp-link a:nth-child(2) {
+  transition-delay: 0.4s;
+}
+
+.wpgp-item-container h3 {
+  font-size: 22px;
+  font-weight: 600;
+  position: absolute;
+  left: 48px;
+  bottom: 90px;
   z-index: 3;
   transition-delay: 0.3s;
-  margin-bottom: -72px;
+  margin-bottom: 64px;
   opacity: 0;
 }
 
 .wpgp-item-container h4 {
+  font-size: 18px;
+  font-weight: 400;
   position: absolute;
-  left: 32px;
-  bottom: 56px;
+  left: 48px;
+  bottom: 70px;
   z-index: 3;
   transition-delay: 0.4s;
   margin-bottom: -64px;
@@ -111,9 +149,10 @@
 }
 
 .wpgp-item-container .wpgp-cat-list {
+  font-size: 14px;
   position: absolute;
-  left: 32px;
-  bottom: 32px;
+  left: 48px;
+  bottom: 42px;
   z-index: 3;
   transition-delay: 0.5s;
   margin-bottom: -56px;
@@ -123,7 +162,16 @@
 .wpgp-item-container:hover .wpgp-contents-bg {
   background-color: #FFFFFF;
   padding: 0px;
-  opacity: 0.56;
+  opacity: 0.88;
+  left: 28px;
+  top: 28px;
+  right: 28px;
+  bottom: 28px;
+}
+
+.wpgp-item-container:hover .wpgp-link a {
+  margin-top: 0px;
+  opacity: 1;
 }
 
 .wpgp-item-container:hover h3,
