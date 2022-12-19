@@ -32,7 +32,7 @@ function wpgo_create_block_init() {
 	
 	register_block_type( __DIR__ . '/build', array( 'render_callback' => 'wpg_portfolio_render_front' ) );
 
-	// requred to access REST API
+	// site-url requred to access REST API
 	wp_localize_script( 'create-block-portfolio-showcase-editor-script', 'wpgp_data', [ 'siteUrl' => get_site_url() ] );
 }
 add_action( 'init', 'wpgo_create_block_init' );
@@ -54,6 +54,41 @@ function wpg_portfolio_block_assets() {
 	wp_enqueue_script( 'portfolio-script',  WPG_PORTFOLIO_URL . 'assets/js/portfolio-script.js', array('jquery'), WPG_PORTFOLIO_VERSION, true );
 }
 add_action( 'enqueue_block_assets', 'wpg_portfolio_block_assets' );
+
+
+/* Filter the single_template */
+add_filter('single_template', 'wpgp_single_template');
+
+function wpgp_single_template($single) {
+
+    global $post;
+
+    /* Checks for single template by post type */
+    if ( $post->post_type == 'portfolio' ) {
+        if ( plugin_dir_path( __FILE__ ) . 'templates/single-portfolio.php' ) {
+            return plugin_dir_path( __FILE__ ) . 'templates/single-portfolio.php';
+        }
+    }
+
+    return $single;
+}
+
+/* Filter the archive_template function */
+add_filter('archive_template', 'wpgp_archive_template');
+
+function wpgp_archive_template($single) {
+
+    global $post;
+
+    /* Checks for single template by post type */
+    if ( $post->post_type == 'portfolio' ) {
+        if ( plugin_dir_path( __FILE__ ) . 'templates/archive-portfolio.php' ) {
+            return plugin_dir_path( __FILE__ ) . 'templates/archive-portfolio.php';
+        }
+    }
+
+    return $single;
+}
 
 
 // Embed plugin meta-box if plugin not installed and active
