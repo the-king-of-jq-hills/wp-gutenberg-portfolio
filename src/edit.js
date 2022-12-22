@@ -108,9 +108,11 @@ export default function Edit({attributes, setAttributes}) {
 	// initiating the masonry layout
 	var isPortfolioExist = document.getElementsByClassName('wpg-portfolio-edit');
 	if (isPortfolioExist.length > 0) {
-		var msnry = new Masonry( '.wpg-portfolio-edit', {
-			itemSelector: '.portfolio-item'
-		});
+		setTimeout(function() {
+			var msnry = new Masonry( '.wpg-portfolio-edit', {
+				itemSelector: '.portfolio-item'
+			});
+		}, 1000);		
 	}
 	// resetting the masonry layout
 	function resetmasonry() {

@@ -9,13 +9,15 @@
  */
 .wp-block-create-block-portfolio-showcase {
   padding: 0px;
+  overflow: hidden;
 }
 
 .wpg-portfolio {
   display: block;
-  width: 100%;
+  width: calc(100% + 32px);
   box-sizing: border-box;
-  border: 1px solid rgb(192, 192, 192);
+  margin-left: -16px;
+  margin-right: -16px;
 }
 
 .wpg-portfolio::after {

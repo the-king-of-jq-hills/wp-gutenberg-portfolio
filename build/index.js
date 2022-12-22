@@ -120,9 +120,11 @@ function Edit(_ref) {
   // initiating the masonry layout
   var isPortfolioExist = document.getElementsByClassName('wpg-portfolio-edit');
   if (isPortfolioExist.length > 0) {
-    var msnry = new (masonry_layout__WEBPACK_IMPORTED_MODULE_3___default())('.wpg-portfolio-edit', {
-      itemSelector: '.portfolio-item'
-    });
+    setTimeout(function () {
+      var msnry = new (masonry_layout__WEBPACK_IMPORTED_MODULE_3___default())('.wpg-portfolio-edit', {
+        itemSelector: '.portfolio-item'
+      });
+    }, 1000);
   }
   // resetting the masonry layout
   function resetmasonry() {

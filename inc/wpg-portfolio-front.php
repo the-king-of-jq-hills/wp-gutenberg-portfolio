@@ -16,6 +16,7 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
     $output = '';
     $portfolio_categories = '';
     $portfolio_url = '';
+    $subtitle = '';
     $img_url = WPG_PORTFOLIO_URL . 'assets/missing.webp';
 
     $output .= '<div ' . get_block_wrapper_attributes() . '>';
@@ -36,6 +37,9 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
 
         // External portfolio link
         $portfolio_url = get_post_meta(get_the_ID(), 'wpgp_portfolio_url', true);
+
+        // Portfolio SubTitle
+        $subtitle = get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true);
 
 		//Get the portfolio category list and strip the link
         $portfolio_terms = get_the_terms(get_the_ID(), 'portfolio-category');
@@ -60,26 +64,26 @@ function wpg_portfolio_render_front( $attr, $content, $block ) {
         $output .= '<div class="wpgp-item-container">';
 
         $output .= '<div class="image-container">';
-        $output .= '<img src='.$img_url.' alt='.get_the_title().' class="portfolio-image" />';
+        $output .= '<img src='. esc_url($img_url) .' alt='. esc_html(get_the_title()) .' class="portfolio-image" />';
         $output .= '</div>';
 
         $output .= '<div class="wpgp-contents-bg"></div>';
        
         $output .= '<div class="wpgp-link">';
-        $output .= '<a href='.get_the_permalink().' rel="nofollow" target="_self" aria-label="Portfolio Details" title="Portfolio Details">';
+        $output .= '<a href='. esc_url( get_the_permalink() ) .' rel="nofollow" target="_self" aria-label="Portfolio Details" title="Portfolio Details">';
         $output .= '<span class="dashicons dashicons-paperclip"></span>';
         $output .= '</a>';
-        if ($portfolio_url) {
-            $output .= '<a href="'.$portfolio_url.'" target="_blank" aria-label="External Link" title="Portfolio Link">';
+        if ( !empty($portfolio_url) ) {
+            $output .= '<a href="'. esc_url($portfolio_url) .'" target="_blank" aria-label="External Link" title="Portfolio Link">';
             $output .= '<span class="dashicons dashicons-admin-links"></span>';
             $output .= '</a>';
         }
         $output .= '</div>';
        
-        $output .= '<h3>'.get_the_title().'</h3>';
-        $output .= '<h4>'.get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true).'</h4>';
-        $output .= '<div class="wpgp-cat-list">'.$portfolio_categories.'</div>';
-
+        $output .= '<h3>'. esc_html(get_the_title()) .'</h3>';
+        $output .= !empty($subtitle) ? ('<h4>'. esc_html($subtitle) .'</h4>') : '';
+        
+        $output .= !empty($portfolio_categories) ? ('<div class="wpgp-cat-list">'. esc_html($portfolio_categories) .'</div>') : '';
 
         $output .= '</div>';
         $output .= '</div>';

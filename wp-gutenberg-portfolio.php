@@ -44,8 +44,14 @@ function wpg_portfolio_block_assets() {
 	// enque portfolio style
     wp_enqueue_style( 'portfolio-style',  WPG_PORTFOLIO_URL . 'assets/css/portfolio-style.css', array(), WPG_PORTFOLIO_VERSION, false  );
 
-	// enque masonry script from WP Library
+    // Swiper Style
+    wp_enqueue_style( 'swiper-style',  WPG_PORTFOLIO_URL . 'assets/css/swiper-bundle.min.css', array(), WPG_PORTFOLIO_VERSION, false  );
+
+    // enque masonry script from WP Library
     wp_enqueue_script( 'jquery-masonry' );
+
+    // swiper js
+    wp_enqueue_script( 'swiperjs',  WPG_PORTFOLIO_URL . 'assets/js/swiper-bundle.min.js', array(), WPG_PORTFOLIO_VERSION, false  );    
 
 	// enque custom stripts
 	wp_enqueue_script( 'jquery-inview',  WPG_PORTFOLIO_URL . 'assets/js/jquery.inview.min.js', array('jquery'), WPG_PORTFOLIO_VERSION, true );
