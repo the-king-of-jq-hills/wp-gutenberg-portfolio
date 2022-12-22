@@ -16,7 +16,24 @@ get_header(); ?>
 		<?php if ( have_posts() ) : ?>
 			<?php /* The loop */ ?>
 			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'content', get_post_format() ); ?>
+
+				
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>    
+				<div class="post-mainpart">    
+					<header class="entry-header">
+						<h1 class="entry-title">
+							<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+						</h1>
+					</header><!-- .entry-header -->
+				
+					<div class="entry-summary">
+						<?php the_excerpt(); ?>
+					</div><!-- .entry-summary -->
+				</div>
+			</article>
+
+
+
 			<?php endwhile; ?>
 
             <?php the_posts_pagination(); ?>            

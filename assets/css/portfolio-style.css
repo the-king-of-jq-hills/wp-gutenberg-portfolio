@@ -1,5 +1,6 @@
 
 .wpgp-page-slider {
+    display: block;
 }
 .swiper-wrapper {
     width: 100%;
@@ -11,5 +12,13 @@
     background-repeat: no-repeat;
     background-position: center center;
     height: 100%;
+}
+
+.folio-meta h2 {
+    margin-bottom: 6px;
+}
+
+.proj-url {
+    margin-top: 6px;
 }
 

@@ -64,18 +64,6 @@ get_header(); ?>
 						<?php if (!empty($sub_title)) : ?>
 							<h2 class="wpgp-subtitle"><?php echo esc_html($sub_title); ?></h2>
 						<?php endif; ?>
-						<?php
-						if (!empty($folio_url))
-						{
-						?>
-							<div class="proj-url">
-							<span class="genericon genericon-external"></span>
-							<a href="<?php echo esc_url($folio_url); ?>"><?php echo esc_html($folio_url); ?></a>
-							</div>
-						<?php
-						}
-						?>                    
-						
 						<div>
 						<?php
 							if ( $categories_list ) {
@@ -86,7 +74,20 @@ get_header(); ?>
 								}
 							}					
 						?>
-						</div>                  
+						</div>
+						
+						<?php
+						if (!empty($folio_url))
+						{
+						?>
+							<div class="proj-url">
+							<span class="genericon genericon-external"></span>
+							<a href="<?php echo esc_url($folio_url); ?>"><?php echo esc_html($folio_url); ?></a>
+							</div>
+						<?php
+						}
+						?> 
+												
 					</div>
                     
 					<div class="entry-content">
