@@ -20,5 +20,74 @@
 
 .proj-url {
     margin-top: 6px;
+    display: flex;
 }
 
+.proj-url .dashicons {
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    color: #959595;
+    font-size: 20px;
+    flex: 0 0 24px;
+    margin-right: 6px;
+}
+
+.proj-url a {
+    flex: 1 0 auto;
+}
+
+/*
+.wpgp-archive-row .wpgp-slider-wrap .wpgp-archive-images.swiper .swiper-wrapper .swiper-slide
+*/
+.wpgp-archive-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.wpgp-slider-wrap {
+    flex: 0 0 12em;
+}
+
+.wpgp-archive-images {
+    width: 12em;
+    height: 12em;
+}
+
+.swiper-wrapper {}
+
+.swiper-slide {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;    
+}
+
+.wpgp-archive-row  .post-mainpart {
+    flex: 1 1 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+
+.post-mainpart .entry-header h2 {
+    margin-bottom: 4px;
+    margin-top: 0px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.post-mainpart .entry-header h4 {
+    margin-bottom: 4px;
+    margin-top: 0px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.post-mainpart p {
+    margin-bottom: auto;
+}
+
+.post-mainpart .moretag {
+    margin-top: 0px;
+    padding-top: 6px;
+}

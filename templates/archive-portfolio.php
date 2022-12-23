@@ -18,17 +18,52 @@ get_header(); ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 
 				
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>    
-				<div class="post-mainpart">    
-					<header class="entry-header">
-						<h1 class="entry-title">
-							<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-						</h1>
-					</header><!-- .entry-header -->
-				
-					<div class="entry-summary">
-						<?php the_excerpt(); ?>
-					</div><!-- .entry-summary -->
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<div class="wpgp-archive-row">
+					<div class="wpgp-slider-wrap">
+						<div class="wpgp-archive-images swiper">
+							<div class="swiper-wrapper">
+							<?php
+								$imgURL = WPG_PORTFOLIO_URL . 'assets/missing.webp';
+								$img_ids = get_post_meta(get_the_ID(), 'wpgp_portfolio_featuredimage', false);
+
+								if ( is_array($img_ids) )
+								{
+									foreach ( $img_ids as $imgid ) {
+										$imgURL = wp_get_attachment_image_url( $imgid, 'full', false );
+										?>
+											<div class="swiper-slide" style="background-image: url(<?php echo esc_url($imgURL); ?>)"></div>
+										<?php
+									}
+								} else {
+									?>
+										<div class="wpgp-archive-slide" style="background-image: url(<?php echo esc_url($imgURL); ?>)"></div>
+									<?php							
+								}
+
+							?>
+							</div>
+
+						</div>
+					</div>	  
+					
+					<?php
+						$sub_title = get_post_meta(get_the_ID(), 'wpgp_portfolio_subtitle', true);
+					?>
+					<div class="post-mainpart">    
+						<header class="entry-header">
+							<h2 class="entry-title">
+								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+							</h2>
+							<?php if (!empty($sub_title)) : ?>
+								<h4 class="wpgp-subtitle"><?php echo esc_html($sub_title); ?></h4>
+							<?php endif; ?>							
+						</header><!-- .entry-header -->
+					
+						<div class="entry-summary">
+							<?php the_excerpt(); ?>
+						</div><!-- .entry-summary -->
+					</div>
 				</div>
 			</article>
 

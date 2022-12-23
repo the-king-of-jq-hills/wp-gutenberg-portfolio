@@ -19,7 +19,7 @@
 
     $(function() {
 
-        var swiper = new Swiper(".mySwiper", {
+        var swiper = new Swiper(".wpgp-single-swiper", {
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -36,6 +36,31 @@
             //effect: 'creative',
             //effect: 'cards',
         });	
+
+
+        var archiveImages = document.getElementsByClassName('wpgp-archive-images');
+        if (archiveImages.length > 0) {
+            var swiper = new Swiper(".wpgp-archive-images", {
+                  // Optional parameters
+                    direction: 'vertical',
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                    },
+                    effect: 'creative',
+                    creativeEffect: {
+                      prev: {
+                        // will set `translateZ(-400px)` on previous slides
+                        translate: [0, 0, -400],
+                      },
+                      next: {
+                        // will set `translateX(100%)` on next slides
+                        translate: ['100%', 0, 0],
+                      },
+                    },                 
+            });	
+        }
+
 
     });
 	

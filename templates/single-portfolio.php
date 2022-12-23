@@ -32,7 +32,7 @@ get_header(); ?>
 					<header class="entry-header">
 						<div class="entry-thumbnail" >
 
-							<div class="swiper mySwiper">
+							<div class="wpgp-single-swiper swiper">
 								<div class="swiper-wrapper">
 									<?php
 										$img_ids = get_post_meta(get_the_ID(), 'wpgp_portfolio_featuredimage', false);
@@ -75,18 +75,6 @@ get_header(); ?>
 							}					
 						?>
 						</div>
-						
-						<?php
-						if (!empty($folio_url))
-						{
-						?>
-							<div class="proj-url">
-							<span class="genericon genericon-external"></span>
-							<a href="<?php echo esc_url($folio_url); ?>"><?php echo esc_html($folio_url); ?></a>
-							</div>
-						<?php
-						}
-						?> 
 												
 					</div>
                     
@@ -94,6 +82,19 @@ get_header(); ?>
 						<?php the_content(); ?>
 						<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'i-design' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 					</div><!-- .entry-content -->
+
+					<?php
+						if (!empty($folio_url))
+						{
+					?>
+						<div class="proj-url">
+							<span class="dashicons dashicons-external"></span>
+							<a href="<?php echo esc_url($folio_url); ?>"><?php echo esc_html($folio_url); ?></a>
+						</div>
+					<?php
+						}
+					?> 
+
 				</article><!-- #post -->
 
 				<?php comments_template(); ?>

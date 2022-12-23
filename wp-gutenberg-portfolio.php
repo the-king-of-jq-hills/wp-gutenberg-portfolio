@@ -41,6 +41,9 @@ add_action( 'init', 'wpgo_create_block_init' );
 // enque block assets for back and front
 function wpg_portfolio_block_assets() {
 
+    // enque dashicons
+    wp_enqueue_style( 'dashicons' );
+
 	// enque portfolio style
     wp_enqueue_style( 'portfolio-style',  WPG_PORTFOLIO_URL . 'assets/css/portfolio-style.css', array(), WPG_PORTFOLIO_VERSION, false  );
 
